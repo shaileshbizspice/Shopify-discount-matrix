@@ -1,0 +1,24 @@
+query CartInput {
+  cart {
+    buyerIdentity {
+      customer {
+        metafield(namespace: "custom", key: "segment") { value }
+      }
+    }
+    lines {
+      id
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            metafield(namespace: "custom", key: "discount_group") { value }
+            productType
+          }
+        }
+      }
+    }
+  }
+  discount {
+    metafield(namespace: ":discount-function", key: "discount-function") { value }
+  }
+}
