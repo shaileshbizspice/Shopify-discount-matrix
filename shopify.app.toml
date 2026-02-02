@@ -2,7 +2,7 @@
 
 client_id = "055d84119e8ee7bce3ab9d750c2fe4e7"
 name = "bizspice-discount-matrix"
-application_url = "https://app.tingue.com"
+application_url = "https://bizspice-discount-matrix-ca9350559388.herokuapp.com/"
 embedded = true
 
 [build]
@@ -24,4 +24,4 @@ api_version = "2026-04"
 scopes = "read_cart_transforms,read_checkouts,read_customer_events,read_customers,read_inventory,read_orders,read_products,read_themes,write_cart_transforms,write_checkouts,write_discounts,write_orders,write_pixels,write_products,write_themes"
 
 [auth]
-redirect_urls = [ "https://app.tingue.com/api/auth" ]
+redirect_urls = [ "https://bizspice-discount-matrix-ca9350559388.herokuapp.com/api/auth" ]
