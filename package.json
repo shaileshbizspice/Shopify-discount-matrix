@@ -1,5 +1,5 @@
 {
-  "name": "matrix-discount-app",
+  "name": "bizspice-discount-matrix",
   "private": true,
   "scripts": {
     "build": "react-router build",
