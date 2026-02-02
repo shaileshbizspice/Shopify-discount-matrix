@@ -29,7 +29,7 @@ export async function ensureDiscount(request) {
 
   const variables = {
     automaticAppDiscount: {
-      title: "Matrix Discount (App)",
+      title: "Bizspice Discount Matrix",
       functionId,
       combinesWith: {
         productDiscounts: true,
@@ -37,6 +37,7 @@ export async function ensureDiscount(request) {
         shippingDiscounts: true,
       },
       startsAt: new Date().toISOString(),
+      "discountClasses": ["PRODUCT"]
     },
   };
 
