@@ -19,6 +19,6 @@ query CartInput {
     }
   }
   discount {
-    metafield(namespace: ":discount-function", key: "discount-function") { value }
+    metafield(namespace: "$app:discount-function", key: "discount-function") { value }
   }
 }
