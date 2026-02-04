@@ -53,7 +53,7 @@ export function cartLinesDiscountsGenerateRun(input) {
     if (!Number.isFinite(pct) || pct <= 0) continue;
 
     candidates.push({
-      message: `${group} - ${pct}% OFF`,
+      message: `${pct}% OFF`,
       targets: [{ cartLine: { id: line.id } }],
       value: { percentage: { value: pct } },
     });

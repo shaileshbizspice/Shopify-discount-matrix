@@ -20,7 +20,7 @@ model Session {
   state         String
   isOnline      Boolean   @default(false)
   scope         String?
-  expires       DateTime?
+  expires       Timestamp?
   accessToken   String
   userId        BigInt?
   firstName     String?
@@ -31,5 +31,5 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
   refreshToken        String?
-  refreshTokenExpires DateTime?
+  refreshTokenExpires Timestamp?
 }
