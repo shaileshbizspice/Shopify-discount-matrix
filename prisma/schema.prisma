@@ -9,9 +9,9 @@ generator client {
 // enough when changing adapters.
 // See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
 datasource db {
-  provider = "mysql"
-  url      = env("JAWSDB_URL")
-  directUrl = env("JAWSDB_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
 }
 
 model Session {
