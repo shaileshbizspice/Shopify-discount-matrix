@@ -70,6 +70,7 @@ export async function ensureDiscount(request) {
         shippingDiscounts: true,
       },
       startsAt: new Date().toISOString(),
+      "discountClasses": ["PRODUCT"]
     },
   };
 
