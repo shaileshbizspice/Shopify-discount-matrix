@@ -15,46 +15,13 @@ export async function ensureDiscount(request) {
 
   const functionId = process.env.SHOPIFY_FUNCTION_ID;
   if (!functionId) {
-    throw new Error("Missing SHOPIFY_FUNCTION_ID");
+    throw new Error("Missing SHOPIFY_FUNCTION_ID (gid://shopify/ShopifyFunction/...)");
   }
 
-  const TITLE = "Bizspice Discount Matrix";
-
-  // 1️⃣ Check if discount already exists in Shopify
-  const query = `
-    query {
-      discountNodes(first: 50) {
-        nodes {
-          id
-          discount {
-            __typename
-            ... on DiscountAutomaticApp {
-              title
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const existing = await adminGql(request, query);
-
-  const match = existing.discountNodes.nodes.find(
-    n =>
-      n.discount?.__typename === "DiscountAutomaticApp" &&
-      n.discount.title === TITLE
-  );
-
-  if (match) {
-    writeAppStore({ ...store, discountNodeId: match.id });
-    return match.id;
-  }
-
-  // 2️⃣ Create discount ONLY if not found
   const mutation = `
     mutation Create($automaticAppDiscount: DiscountAutomaticAppInput!) {
       discountAutomaticAppCreate(automaticAppDiscount: $automaticAppDiscount) {
-        automaticAppDiscount { discountId }
+        automaticAppDiscount { discountId title startsAt }
         userErrors { field message }
       }
     }
@@ -62,7 +29,7 @@ export async function ensureDiscount(request) {
 
   const variables = {
     automaticAppDiscount: {
-      title: TITLE,
+      title: "Bizspice Discount Matrix",
       functionId,
       combinesWith: {
         productDiscounts: true,
@@ -81,13 +48,11 @@ export async function ensureDiscount(request) {
     throw new Error(`discountAutomaticAppCreate userErrors: ${JSON.stringify(errs)}`);
   }
 
-  const discountNodeId =
-    data.discountAutomaticAppCreate.automaticAppDiscount.discountId;
+  const discountNodeId = data.discountAutomaticAppCreate.automaticAppDiscount.discountId;
 
   writeAppStore({ ...store, discountNodeId });
   return discountNodeId;
 }
-
 
 /**
  * 2) saveMatrix(): store JSON matrix on the discount node as app-owned metafield.
